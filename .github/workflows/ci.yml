@@ -6,10 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-      - run: |
+        run: |
           echo "Hello world"
-      - name: this will fail
-      - run: exit 1;
+      
       
           
    
