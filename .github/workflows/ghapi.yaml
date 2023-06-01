@@ -1,0 +1,32 @@
+name: ghapi-actions
+on: 
+  issue_comment:
+    types: [created, edited, deleted]
+    
+env: 
+  NUMBER: ${{ github.event.number }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKENS }}
+  REPO: ${{ github.repository }}
+  
+permissions:
+ issues: write
+ pull-requests: write
+ contents: read
+ 
+jobs:
+  create-bug-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install project dependencies
+        run: |-
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run python script
+        run: |- 
+          python create_bug_label.py
+
