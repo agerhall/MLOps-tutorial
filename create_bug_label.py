@@ -1,8 +1,8 @@
 import os
 from ghapi.all import GhApi
 
-issue_num = int(os.environ.get('NUMBER'))
-owner, repo = os.environ.get('REPO').split('/')
+issue_num = int(os.environ['NUMBER'])
+owner, repo = os.environ['REPO'].split('/')
 
 api = GhApi(owner=owner, repo=repo)
 comments = api.issues.list_comments(issue_num)
