@@ -2,11 +2,6 @@ name: ghapi-actions
 on: 
   issue_comment:
     types: [created, edited, deleted]
-    
-env: 
-  NUMBER: ${{ github.event.number }}
-  GH_TOKEN: ${{ secrets.GITHUB_TOKENS }}
-  REPO: ${{ github.repository }}
   
 permissions:
  issues: write
@@ -29,4 +24,8 @@ jobs:
       - name: Run python script
         run: |- 
           python create_bug_label.py
+        env: 
+          NUMBER: ${{ github.event.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKENS }}
+          REPO: ${{ github.repository }}
 
